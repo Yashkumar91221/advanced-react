@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Link, Route, Routes } from "react-router-dom";
+import CommentBox from "./components/CommentBox";
+import CommentList from "./components/CommentList";
+import * as React from "react";
+import Container from "@mui/material/Container";
+import { Button, ButtonGroup, Stack } from "@mui/material";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+      <Stack
+        justifyContent="flex-start"
+        alignItems="flex-end"
+        spacing={2}
+      >
+        <ButtonGroup>
+        <Link to="/">
+            <Button color="secondary">Home</Button>
+          </Link>
+          <Link to="/post">
+            <Button color="secondary">Add a comment</Button>
+          </Link>
+          <Button color="primary" size="large">
+            Sign In
+          </Button>
+        </ButtonGroup>
+      </Stack>
+
+      <Routes>
+        <Route path="/post" element={<CommentBox />}></Route>
+        <Route path="/" exact element={<CommentList />}></Route>
+      </Routes>
+    </Container>
   );
-}
+};
 
 export default App;

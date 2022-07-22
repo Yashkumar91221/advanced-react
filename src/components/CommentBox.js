@@ -8,17 +8,21 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ADD_COMMENT } from "../actions/types";
+import { add_comment } from "../actions/actions";
+import requireAuth from "./requireAuth";
 
-const CommentBox = () => {
+const CommentBox = (props) => {
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
   const textchangeHandler = (e) => {
     setComment(e.target.value);
   };
+  const { history } = props;
   const addCommentHandler = () => {
-    dispatch({ type: ADD_COMMENT, value: comment });
+    dispatch(add_comment(comment));
+    history.push("/");
   };
+
   return (
     <>
       <Card raised>
@@ -45,4 +49,4 @@ const CommentBox = () => {
   );
 };
 
-export default CommentBox;
+export default requireAuth(CommentBox);
